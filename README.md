@@ -18,7 +18,7 @@ Voting classifier is based on previously tuned models - Logistic Regression, SVM
 <img src="./images/voting.png" width="900">
 
  - Adaptive Boosting Classifier<br>
-Adaptive boosting classifier is implemented using RandomizedSearchCV for its hyperparameters tuning. F1 score was used as optimization metric for hyperparameters selection.
+Adaptive boosting classifier is implemented using Decision Tree model. RandomizedSearchCV is used for hyperparameters tuning. F1 score was used as optimization metric for hyperparameters selection.
 <img src="./images/boosting.png" width="900">
 
  - Neural Network<br>
