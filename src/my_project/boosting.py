@@ -124,7 +124,7 @@ def boosting(
         )
         gs_metric = make_scorer(f1, average=average)
         rnd_search = RandomizedSearchCV(
-            ada_clf, model_params, scoring=gs_metric, n_iter=3, cv=5
+            ada_clf, model_params, scoring=gs_metric, n_iter=1, cv=5
         )
         result = rnd_search.fit(X_train_prep, y)
 
