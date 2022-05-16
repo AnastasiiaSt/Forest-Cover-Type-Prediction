@@ -26,6 +26,7 @@ Deep neural networks with different number of layers and inner layers nodes are 
 <img src="./images/neural_network.png" width="900">
 
 ### Score on Kaggle
+Best score on testing dataset is obtained with Extra Trees Classifier model.
 <img src="./images/kaggle_score.png" width="900">
 
 
