@@ -14,7 +14,7 @@ Automatic hyperparameters tuning by means of RandomizedSearchCV is implemented t
 <img src="./images/tuning.png" width="900">
 
  - Voting Classifier:<br>
-Voting classifier is based on previously tuned models - Logistic Regression, SVM Linear Classifier, Extra Trees Classifier, Random Forest Classifier. Hard voting classifier shows better performance than each model individually. 
+Voting classifier is based on four previously tuned models - Logistic Regression, SVM Linear Classifier, Extra Trees Classifier, Random Forest Classifier. 
 <img src="./images/voting.png" width="900">
 
  - Adaptive Boosting Classifier:<br>
