@@ -22,7 +22,7 @@ Adaptive boosting classifier is implemented using Decision Tree model. Randomize
 <img src="./images/boosting.png" width="900">
 
  - Neural Network<br>
-Deep neural networks with different number of layers and inner layers nodes are trained. For inner layers, rulu activation function is used, for outer layer - softmax. For optimization, sparse categorical cross entropy and accuracy metric are chosen.
+Deep neural networks with different number of layers and inner layers nodes are trained. For inner layers, relu activation function is used, for outer layer - softmax. For optimization, sparse categorical cross entropy and accuracy metric are chosen.
 <img src="./images/neural_network.png" width="900">
 
 ### Score on Kaggle
