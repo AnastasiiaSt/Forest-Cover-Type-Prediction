@@ -1,0 +1,4 @@
+.mypy_cache
+mlruns
+data
+src/my_project/__pycache__
