@@ -1,6 +1,6 @@
 import numpy as np
 import pandas as pd
-from sklearn.ensemble import GradientBoostingClassifier
+from sklearn.ensemble import AdaBoostClassifier
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.model_selection import RandomizedSearchCV
 from sklearn.metrics import make_scorer
@@ -116,14 +116,15 @@ def boosting(
 
     with mlflow.start_run(experiment_id=3, run_name="Boosting Classifier"):
 
-        gbc_clf = GradientBoostingClassifier(
+        ada_clf = AdaBoostClassifier(
+            DecisionTreeClassifier(),
             n_estimators=n_estimators,
             learning_rate=learning_rate,
             random_state=random_state,
         )
         gs_metric = make_scorer(f1, average=average)
         rnd_search = RandomizedSearchCV(
-            gbc_clf, model_params, scoring=gs_metric, n_iter=3, cv=5
+            ada_clf, model_params, scoring=gs_metric, n_iter=3, cv=5
         )
         result = rnd_search.fit(X_train_prep, y)
 
