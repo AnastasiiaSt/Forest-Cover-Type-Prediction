@@ -121,6 +121,7 @@ def boosting(
             n_estimators=n_estimators,
             learning_rate=learning_rate,
             random_state=random_state,
+            algorithm = "SAMME"
         )
         gs_metric = make_scorer(f1, average=average)
         rnd_search = RandomizedSearchCV(
@@ -141,7 +142,7 @@ def boosting(
 
         mlflow.log_metric("f1_score", f1_score)
 
-        mlflow.sklearn.log_model(best_model, "Boosting Classifier")
+        mlflow.sklearn.log_model(best_model, "AdaBoosting Classifier")
 
     y_pred = rnd_search.predict(X_test_prep)
 
