@@ -6,7 +6,7 @@ Training and testing datasets [Forest Cover Type](https://www.kaggle.com/competi
  - Conversiion of negative numerical values into positive: true or false
 
 ### Model Training
-Logistic Regression, SVM Linear Classifier, Extra Trees Classifier, Random Forest Classifier, Voting Classifier, Gradient Boosting Classifier and Deep Neural Network are used for training. The following experiments are created in MLflow:
+Logistic Regression, SVM Linear Classifier, Extra Trees Classifier, Random Forest Classifier, Voting Classifier, Adaptive Boosting Classifier and Deep Neural Network are used for training. The following experiments are created in MLflow:
 <img src="./images/experiments.png" width="180">
 
  - Logistic Regression, SVM Linear Classifier, Extra Trees Classifier, Random Forest Classifier<br>
@@ -17,8 +17,8 @@ Automatic hyperparameters tuning by means of RandomizedSearchCV was implemented 
 Voting classifier is based on previously tuned models - Logistic Regression, SVM Linear Classifier, Extra Trees Classifier, Random Forest Classifier. Hard voting classifier shows better performance than each model individually. 
 <img src="./images/voting.png" width="900">
 
- - Gradient Boosting Classifier<br>
-Gradient boosting classifier is implemented using RandomizedSearchCV for its hyperparameters tuning. F1 score was used as optimization metric for hyperparameters selection.
+ - Adaptive Boosting Classifier<br>
+Adaptive boosting classifier is implemented using RandomizedSearchCV for its hyperparameters tuning. F1 score was used as optimization metric for hyperparameters selection.
 <img src="./images/boosting.png" width="900">
 
  - Neural Network<br>
