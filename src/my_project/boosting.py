@@ -69,11 +69,11 @@ class BoolList(click.Option):
 )
 @click.option(
     "--cat_encoding",
-    default="ordinal",
+    default="no",
     help="Type of encoding for categorical features",
 )
 @click.option(
-    "--num_scaling", default="min_max", help="Type of scaling for numerical features"
+    "--num_scaling", default="standard", help="Type of scaling for numerical features"
 )
 @click.option("--remove_outliers", default=True, help="Remove outliers from dataset")
 @click.option("--data_valid", default=True, help="Remove negative values")
@@ -123,7 +123,7 @@ def boosting(
         )
         gs_metric = make_scorer(f1, average=average)
         rnd_search = RandomizedSearchCV(
-            gbc_clf, model_params, scoring=gs_metric, n_iter=16, cv=5
+            gbc_clf, model_params, scoring=gs_metric, n_iter=3, cv=5
         )
         result = rnd_search.fit(X_train_prep, y)
 
