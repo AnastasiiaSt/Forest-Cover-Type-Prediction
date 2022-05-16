@@ -11,8 +11,6 @@ from .data import get_test_data
 from .preprocess import Preprocessing
 from .tune import eval_metric
 
-experiment_id = mlflow.create_experiment("Voting Classifier")
-
 
 @click.command()
 @click.option(
@@ -55,7 +53,7 @@ def voting(
     }
 
 
-    with mlflow.start_run(experiment_id=experiment_id, run_name="Voting Classifier"):
+    with mlflow.start_run(experiment_id=4, run_name="Voting Classifier"):
         log_clf = joblib.load(os.path.join(save_model_path, "log_model.joblib"))
         rnd_clf = joblib.load(os.path.join(save_model_path, "rnd_model.joblib"))
         svm_clf = joblib.load(os.path.join(save_model_path, "svm_model.joblib"))
