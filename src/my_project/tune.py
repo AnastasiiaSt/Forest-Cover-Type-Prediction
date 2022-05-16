@@ -143,7 +143,7 @@ class BoolList(click.Option):
     "--loss",
     cls=StringList,
     default=[],
-    help="Criterion for RandomForestClassifier",
+    help="Criterion for SVM",
 )
 @click.option("--save_model_path", default=os.path.join(Path.cwd(), "data"))
 @click.option(
