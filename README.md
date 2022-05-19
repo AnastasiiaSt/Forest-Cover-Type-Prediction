@@ -1,5 +1,7 @@
+### Problem Description
+Training and testing datasets [Forest Cover Type](https://www.kaggle.com/competitions/forest-cover-type-prediction/data) from Kaggle are used in this project. Detailed information about training and testing datasets can be found in the [training set report](http://htmlpreview.github.io/?https://github.com/AnastasiiaSt/Capstone-Project/blob/main/profile_report_train.html) and [testing set report](http://htmlpreview.github.io/?https://github.com/AnastasiiaSt/Capstone-Project/blob/main/profile_report_test.html), which were created using pandas profiling module. <br>
+
 ### Feature Engineering
-Training and testing datasets [Forest Cover Type](https://www.kaggle.com/competitions/forest-cover-type-prediction/data) from Kaggle are used in this project. Detailed information about training set and testing set can be found in the [training report](http://htmlpreview.github.io/?https://github.com/AnastasiiaSt/Capstone-Project/blob/main/profile_report_train.html) and [testing report](http://htmlpreview.github.io/?https://github.com/AnastasiiaSt/Capstone-Project/blob/main/profile_report_test.html), which were created using pandas profiling module. <br>
 For feature preprocessing, custom class Preprocessing is created, which includes the following options for scaling, encoding and modification:
  - Encoding of categorical features: frequency, ordinal or no encoding
  - Scaling of numerical features: standard, min_max or no scaling
@@ -7,23 +9,23 @@ For feature preprocessing, custom class Preprocessing is created, which includes
  - Conversion of negative numerical values into positive: true or false
 
 ### Model Training
-Logistic Regression, Extra Trees Classifier, Random Forest Classifier, Voting Classifier, Deep Neural Network are used for training. The following experiments are created in MLflow:
+Logistic Regression, Extra Trees Classifier, Random Forest Classifier, Voting Classifier, Deep Neural Network are used for training. The following experiments are created in MLflow: <br>
 <img src="./images/experiments.png" width="180">
 
  - Logistic Regression, Extra Trees Classifier, Random Forest Classifier:<br>
-Automatic hyperparameters tuning by means of RandomizedSearchCV is implemented to determine best hyperparameters for the four machine learning models. Nested cross validation is employed to select and evaluate the models. F1 score is used as optimization metric for hyperparameters selection. Generalized performance of the classifier is evaluated with three metrics - precision, recall and f1 score.
+Automatic hyperparameters tuning by means of RandomizedSearchCV is implemented to determine best hyperparameters for the three machine learning models. Nested cross validation is employed to select and evaluate the models. F1 score is used as optimization metric for hyperparameters selection. Generalized performance of the classifier is evaluated with three metrics - precision, recall and f1 score.
 <img src="./images/tuning.png" width="900">
 
  - Voting Classifier:<br>
-Voting classifier is based on four previously tuned models - Logistic Regression, SVM Linear Classifier, Extra Trees Classifier, Random Forest Classifier. 
+Voting classifier is based on three previously tuned models - Logistic Regression, Extra Trees Classifier, Random Forest Classifier. 
 <img src="./images/voting.png" width="900">
 
  - Neural Network:<br>
-Deep neural networks with different number of layers and hidden layers nodes are trained. For inner layers, relu activation function is used, for outer layer - softmax. For optimization, sparse categorical cross entropy and accuracy metric are chosen.
+Deep neural networks with different number of layers and hidden layers nodes are trained. For hidden layers, relu activation function is used, for outer layer - softmax. For optimization, sparse categorical cross entropy and accuracy metric are chosen.
 <img src="./images/neural_network.png" width="900">
 
 ### Score on Kaggle
-Best score on testing dataset is obtained with Extra Trees Classifier model.
+Best score on testing dataset is obtained with Extra Trees Classifier model. Outliers for all features were removed, absolute value of features, which represent distance are used. Soil Type and Wilderness Area features are encoded using Ordinal Encoding and all features are scaled with MinMax scaler. 
 <img src="./images/kaggle_score.png" width="900">
 
 ### Usage
