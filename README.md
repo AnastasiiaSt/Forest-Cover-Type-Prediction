@@ -1,5 +1,5 @@
-### Problem Description
-Training and testing datasets [Forest Cover Type](https://www.kaggle.com/competitions/forest-cover-type-prediction/data) from Kaggle are used in this project. Detailed information about training and testing datasets can be found in the [training set report](http://htmlpreview.github.io/?https://github.com/AnastasiiaSt/Capstone-Project/blob/main/profile_report_train.html) and [testing set report](http://htmlpreview.github.io/?https://github.com/AnastasiiaSt/Capstone-Project/blob/main/profile_report_test.html), which were created using pandas profiling module. <br>
+### Description
+This is a project for Kaggle competition [Forest Cover Type Prediction(https://www.kaggle.com/competitions/forest-cover-type-prediction/overview). The goal is based on the features such as Elevation, Aspect, Slope, different types of Distances, Hillshade, Wilderness Area and Soil Type to  distinguish seven Forest Cover Types, which include Spruce/Fur, Lodgepole Pine, Ponderosa Pine, Cottonwood/Willow, Aspen, Douglas-fir, Krummholz. Detailed information about training and testing datasets can be found in the [training set report](http://htmlpreview.github.io/?https://github.com/AnastasiiaSt/Capstone-Project/blob/main/profile_report_train.html) and [testing set report](http://htmlpreview.github.io/?https://github.com/AnastasiiaSt/Capstone-Project/blob/main/profile_report_test.html), which were created using pandas profiling module. <br>
 
 ### Feature Engineering
 For feature preprocessing, custom class Preprocessing is created, which includes the following options for scaling, encoding and modification:
@@ -25,7 +25,7 @@ Deep neural networks with different number of layers and hidden layers nodes are
 <img src="./images/neural_network.png" width="900">
 
 ### Score on Kaggle
-Best score on testing dataset is obtained with Extra Trees Classifier model. Outliers for all features were removed, absolute value of features, which represent distance are used. Soil Type and Wilderness Area features are encoded using Ordinal Encoding and all features are scaled with MinMax scaler. 
+Best score on testing dataset is obtained with Extra Trees Classifier model. Outliers for all features are removed, absolute value of features, which represent distance are used. Soil Type and Wilderness Area features are encoded using Ordinal Encoding and all features are scaled with MinMax scaler. 
 <img src="./images/kaggle_score.png" width="900">
 
 ### Usage
