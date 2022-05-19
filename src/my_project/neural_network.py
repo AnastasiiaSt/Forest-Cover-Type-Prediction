@@ -98,6 +98,7 @@ def train_n_n(
     with mlflow.start_run(experiment_id=1, run_name="Neural network"):
 
         model = keras.models.Sequential()
+        model.add(keras.layers.InputLayer(input_shape=X_train_prep.shape))
         for i in range(layers - 1):
             model.add(keras.layers.Dense(nodes_list[i], activation=activation))
         model.add(keras.layers.Dense(nodes_list[-1], activation="softmax"))
