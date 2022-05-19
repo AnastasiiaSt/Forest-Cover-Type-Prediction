@@ -22,7 +22,6 @@ class Preprocessing:
         if self.data_valid:
             num_dataset = self.num_data_valid(num_dataset)
 
-        # if self.remove_outliers and (len(dataset) == len(self.train_dataset)):
         if self.remove_outliers:
             num_dataset = self.remove_outliers_f(num_dataset)
 
