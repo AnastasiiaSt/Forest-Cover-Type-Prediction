@@ -29,7 +29,7 @@ build-backend = "poetry.core.masonry.api"
 [tool.poetry.scripts]
 report = "src.my_project.data:profile_report"
 tune = "src.my_project.tune:tune"
-train_nn = "src.my_project.neural_network:train_n_n"
+train_nn = "src.my_project.neural_network:train_nn"
 voting = "src.my_project.voting:voting"
 boosting = "src.my_project.boosting:boosting"
 
