@@ -29,7 +29,7 @@ from .preprocess import Preprocessing
 @click.option(
     "--learning_rate", default=0.0005, help="Learning rate for gradient descent"
 )
-@click.option("--epoch", default=4000, help="Number of epochs for neural network")
+@click.option("--epoch", default=400, help="Number of epochs for neural network")
 @click.option(
     "--cat_encoding", default="no", help="Type of encoding for categorical features"
 )
@@ -43,7 +43,10 @@ from .preprocess import Preprocessing
 @click.option("--data_valid", default=True, help="Remove negative values")
 @click.option("--random_state", default=42, help="Random state")
 @click.option("--dataset_path", default=os.path.join(Path.cwd(), "data", "train.csv"))
-@click.option("--save_model_path", default=os.path.join(Path.cwd(), "data", "nn_model.joblib"))
+@click.option(
+    "--save_model_path", default=os.path.join(Path.cwd(), "data", "nn_model.joblib")
+)
+@click.option("--submission", default=False)
 def train_nn(
     nodes_list: list,
     activation: str,
@@ -57,6 +60,7 @@ def train_nn(
     dataset_path: str,
     save_model_path: str,
     random_state: int,
+    submission: bool,
 ) -> None:
 
     X, y = get_data(dataset_path)
@@ -98,7 +102,6 @@ def train_nn(
     with mlflow.start_run(experiment_id=1, run_name="Neural network"):
 
         model = keras.models.Sequential()
-        model.add(keras.layers.InputLayer(input_shape=X_train_prep.shape))
         for i in range(layers - 1):
             model.add(keras.layers.Dense(nodes_list[i], activation=activation))
         model.add(keras.layers.Dense(nodes_list[-1], activation="softmax"))
@@ -122,10 +125,11 @@ def train_nn(
 
         joblib.dump(model, save_model_path)
 
-    y_pred = model.predict(X_test_prep)
+    if submission:
+        y_pred = model.predict(X_test_prep)
 
-    prediction = np.argmax(y_pred, axis=1)
-    prediction = ord_enc.inverse_transform(prediction.reshape((-1, 1)))
+        prediction = np.argmax(y_pred, axis=1)
+        prediction = ord_enc.inverse_transform(prediction.reshape((-1, 1)))
 
-    df = pd.DataFrame({"Id": index, "Cover_Type": prediction.reshape((-1,))})
-    df.to_csv(os.path.join(Path.cwd(), "data", "submission.csv"), index=False)
+        df = pd.DataFrame({"Id": index, "Cover_Type": prediction.reshape((-1,))})
+        df.to_csv(os.path.join(Path.cwd(), "data", "submission.csv"), index=False)
