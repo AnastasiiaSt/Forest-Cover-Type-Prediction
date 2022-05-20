@@ -43,7 +43,7 @@ from .preprocess import Preprocessing
 @click.option("--average", default="macro")
 @click.option("--random_state", default=42, help="Random state")
 @click.option("--dataset_path", default=os.path.join(Path.cwd(), "data", "train.csv"))
-def train_n_n(
+def train_nn(
     nodes_list: list,
     activation: str,
     cat_encoding: str,
