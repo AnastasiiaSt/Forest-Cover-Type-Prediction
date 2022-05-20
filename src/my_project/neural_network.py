@@ -41,10 +41,9 @@ from .preprocess import Preprocessing
 )
 @click.option("--remove_outliers", default=True, help="Remove outliers from dataset")
 @click.option("--data_valid", default=True, help="Remove negative values")
-@click.option("--average", default="macro")
 @click.option("--random_state", default=42, help="Random state")
 @click.option("--dataset_path", default=os.path.join(Path.cwd(), "data", "train.csv"))
-@click.option("--save_model_path", default=os.path.join(Path.cwd(), "data"))
+@click.option("--save_model_path", default=os.path.join(Path.cwd(), "data", "nn_model.joblib"))
 def train_nn(
     nodes_list: list,
     activation: str,
@@ -121,7 +120,7 @@ def train_nn(
         mlflow.log_metric("accuracy", history.history["accuracy"][-1])
         mlflow.keras.log_model(model, "Neural Network")
 
-        joblib.dump(model, os.path.join(save_model_path, "nn_model.joblib"))
+        joblib.dump(model, save_model_path)
 
     y_pred = model.predict(X_test_prep)
 
