@@ -7,6 +7,7 @@ import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import OrdinalEncoder
 from pathlib import Path
+import joblib
 from .tune import StringList
 from .data import get_data
 from .data import get_test_data
@@ -43,6 +44,7 @@ from .preprocess import Preprocessing
 @click.option("--average", default="macro")
 @click.option("--random_state", default=42, help="Random state")
 @click.option("--dataset_path", default=os.path.join(Path.cwd(), "data", "train.csv"))
+@click.option("--save_model_path", default=os.path.join(Path.cwd(), "data"))
 def train_nn(
     nodes_list: list,
     activation: str,
@@ -54,6 +56,7 @@ def train_nn(
     remove_outliers: bool,
     data_valid: bool,
     dataset_path: str,
+    save_model_path: str,
     random_state: int,
 ) -> None:
 
@@ -117,6 +120,8 @@ def train_nn(
         mlflow.log_metric("val_accuracy", history.history["val_accuracy"][-1])
         mlflow.log_metric("accuracy", history.history["accuracy"][-1])
         mlflow.keras.log_model(model, "Neural Network")
+
+        joblib.dump(model, os.path.join(save_model_path, "nn_model.joblib"))
 
     y_pred = model.predict(X_test_prep)
 
