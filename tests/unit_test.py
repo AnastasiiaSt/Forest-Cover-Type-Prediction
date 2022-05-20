@@ -12,7 +12,7 @@ def input_path() -> str:
     return path
 
 
-def test_get_data(input_path: Path) -> None:
+def test_get_data(input_path: str) -> None:
     X, y = get_data(path=input_path)
     assert X.shape[0] > 1, "Size of the dataset is insufficient."
     assert (
@@ -25,7 +25,7 @@ def test_number_of_nodes_in_nn(input_path: str) -> None:
     with runner.isolated_filesystem():
         result = runner.invoke(
             train_nn,
-            ["--nodes_list", [32, 16, 5]],
+            ["--nodes_list", "[32,16,5]"],
         )
         assert (
             result.exit_code == 1
