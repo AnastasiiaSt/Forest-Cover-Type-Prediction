@@ -1,4 +1,3 @@
-import tensorflow as tf
 from tensorflow import keras
 import click
 import os
@@ -54,8 +53,7 @@ def train_n_n(
     valid_prop: float,
     remove_outliers: bool,
     data_valid: bool,
-    dataset_path: Path,
-    average: str,
+    dataset_path: str,
     random_state: int,
 ) -> None:
 

@@ -71,8 +71,6 @@ class Preprocessing:
 
             lower, upper = data_mean - cut_off, data_mean + cut_off
 
-            m = len(num_dataset)
-
             num_dataset[num_dataset[item] < lower][item] = data_mean
             num_dataset[num_dataset[item] > upper][item] = data_mean
         return num_dataset

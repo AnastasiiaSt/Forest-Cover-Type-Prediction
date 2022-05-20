@@ -1,4 +1,3 @@
-import numpy as np
 import pandas as pd
 import os
 from sklearn.ensemble import VotingClassifier
@@ -24,7 +23,7 @@ from .tune import eval_metric
 @click.option("--dataset_path", default=os.path.join(Path.cwd(), "data", "train.csv"))
 @click.option("--save_model_path", default=os.path.join(Path.cwd(), "data"))
 def voting(
-    dataset_path: Path,
+    dataset_path: str,
     save_model_path: Path,
     cat_encoding: str,
     num_scaling: str,
@@ -52,18 +51,15 @@ def voting(
         "remove_outliers": remove_outliers,
     }
 
-
     with mlflow.start_run(experiment_id=4, run_name="Voting Classifier"):
         log_clf = joblib.load(os.path.join(save_model_path, "log_model.joblib"))
         rnd_clf = joblib.load(os.path.join(save_model_path, "rnd_model.joblib"))
-        svm_clf = joblib.load(os.path.join(save_model_path, "svm_model.joblib"))
         extra_clf = joblib.load(os.path.join(save_model_path, "extra_model.joblib"))
 
         voting_clf = VotingClassifier(
             estimators=[
                 ("Logistic regression", log_clf),
                 ("Random Forest", rnd_clf),
-                ("Support Vector Machine", svm_clf),
                 ("Extra Trees Classifier", extra_clf),
             ],
             voting="hard",
@@ -77,8 +73,7 @@ def voting(
         model_params = {
             "Logistic regression": "used",
             "Random Forest": "used",
-            "Support Vector Machine": "used",
-            "Extra Trees Classifier": "used"
+            "Extra Trees Classifier": "used",
         }
 
         params = {**prep_params, **model_params}

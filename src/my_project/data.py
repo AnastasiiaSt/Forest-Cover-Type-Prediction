@@ -9,7 +9,7 @@ import click
 
 
 def get_data(
-    path: Path = os.path.join(Path.cwd(), "data", "train.csv")
+    path: str = os.path.join(Path.cwd(), "data", "train.csv")
 ) -> Tuple[pd.DataFrame, pd.Series]:
     dataset = pd.read_csv(path, index_col="Id")
 
@@ -20,7 +20,7 @@ def get_data(
     return X, y
 
 
-def get_test_data(path: Path) -> Tuple[pd.DataFrame, pd.Series]:
+def get_test_data(path: str) -> Tuple[pd.DataFrame, pd.Series]:
     dataset = pd.read_csv(path, index_col="Id")
 
     click.echo("Dataset size: {0}.".format(dataset.shape))

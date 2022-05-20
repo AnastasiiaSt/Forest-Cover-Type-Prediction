@@ -1,4 +1,3 @@
-from operator import index
 import os
 from pathlib import Path
 import pandas as pd
@@ -6,16 +5,13 @@ import numpy as np
 import mlflow
 import mlflow.sklearn
 import click
-import numpy as np
 import joblib
-from sklearn.tree import DecisionTreeClassifier
 from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.ensemble import ExtraTreesClassifier
-from sklearn.svm import LinearSVC
 from sklearn.metrics import precision_score, recall_score, make_scorer
 from sklearn.metrics import f1_score as f1
-from sklearn.model_selection import KFold, RandomizedSearchCV, StratifiedKFold
+from sklearn.model_selection import RandomizedSearchCV, StratifiedKFold
 from .data import get_data
 from .data import get_test_data
 from typing import Tuple
@@ -77,7 +73,7 @@ class BoolList(click.Option):
 @click.option(
     "--model",
     type=click.Choice(
-        ["Decision Tree", "Logistic Regression", "Random Forest", "SVM", "Extra Trees"],
+        ["Logistic Regression", "Random Forest", "Extra Trees"],
         case_sensitive=False,
     ),
     help="The model to be trained",
@@ -139,12 +135,6 @@ class BoolList(click.Option):
 @click.option(
     "--bootstrap", cls=BoolList, default=[], help="Whether use or not bootstrap"
 )
-@click.option(
-    "--loss",
-    cls=StringList,
-    default=[],
-    help="Criterion for SVM",
-)
 @click.option("--save_model_path", default=os.path.join(Path.cwd(), "data"))
 @click.option(
     "--cat_encoding", default="no", help="Type of encoding for categorical features"
@@ -170,8 +160,7 @@ def tune(
     criterion: list,
     min_samples_split: list,
     bootstrap: list,
-    loss: list,
-    dataset_path: Path,
+    dataset_path: str,
     kf_n_inner: int,
     kf_n_outer: int,
     cat_encoding: str,
@@ -203,15 +192,14 @@ def tune(
     all_params = {
         "n_estimators": n_estimators,  # ExtraTree, RandomForest
         "max_depth": max_depth,  # ExtraTree, RandomForest, DecisionTree
-        "max_iter": max_iter,  # LogisticRegression, SVM
-        "C": regularization,  # LogisticRegression, SVM
-        "penalty": penalty,  # LogisticRegression, SVM
-        "tol": tol,  # LogisticRegression, SVM
+        "max_iter": max_iter,  # LogisticRegression
+        "C": regularization,  # LogisticRegression
+        "penalty": penalty,  # LogisticRegression
+        "tol": tol,  # LogisticRegression
         "solver": solver,  # LogisticRegression
         "criterion": criterion,  # ExtraTree, RandomForest, DecisionTree
         "bootstrap": bootstrap,  # ExtraTree, RandomForest
         "min_samples_split": min_samples_split,  # ExtraTree, RandomForest, DecisionTree
-        "loss": loss,  # SMV
     }
 
     prep_params = {
@@ -228,18 +216,12 @@ def tune(
             model_params[param[0]] = param[1]
             click.echo("Parameter: {0} - {1}".format(param[0], param[1]))
 
-    if model == "Decision Tree":
-        train_model = DecisionTreeClassifier(random_state=random_state)
-        model_file = "tree_model.joblib"
-    elif model == "Logistic Regression":
+    if model == "Logistic Regression":
         train_model = LogisticRegression(random_state=random_state)
         model_file = "log_model.joblib"
     elif model == "Random Forest":
         train_model = RandomForestClassifier(random_state=random_state)
         model_file = "rnd_model.joblib"
-    elif model == "SVM":
-        train_model = LinearSVC(random_state=random_state)
-        model_file = "svm_model.joblib"
     elif model == "Extra Trees":
         train_model = ExtraTreesClassifier(random_state=random_state)
         model_file = "extra_model.joblib"
