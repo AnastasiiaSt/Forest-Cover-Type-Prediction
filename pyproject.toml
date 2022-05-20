@@ -14,6 +14,7 @@ click = "^8.1.3"
 scikit-learn = "^1.1.0"
 pywin32 = "^304"
 mlflow = "^1.25.1"
+nox = "^2022.1.7"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
