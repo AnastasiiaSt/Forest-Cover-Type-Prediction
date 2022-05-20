@@ -2,3 +2,4 @@
 mlruns
 data
 src/my_project/__pycache__
+tests/__pycache__
