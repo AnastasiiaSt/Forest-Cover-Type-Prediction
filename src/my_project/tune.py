@@ -268,7 +268,7 @@ def tune(
             best_params = result.best_params_
             outer_params.append(best_params)
 
-            params = {**prep_params, **best_params}
+            params = {**best_params, **prep_params}
             params["kf_n_outer"] = kf_n_outer
             params["kf_n_inner"] = kf_n_inner
 
