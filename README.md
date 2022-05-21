@@ -58,7 +58,7 @@ poetry run train_nn --nodes_list=[56,28,14,7]
 ```
 Number of neurons in each layer of neural network should be provided in the form of list. In the line above, neural network with three hidden layers of 56, 28 and 14 neurons and one output layer of 7 neurons is created. To get a full list of neural network hyperparameters use *--help*:
 ```sh
-poetry run train_n_n --help
+poetry run train_nn --help
 ```
 9. Run MLflow UI to see the information about conducted experiments:
 ```sh
